@@ -9,8 +9,6 @@ class User():
         self.__bankOwner = bankOwner
         self.__username = username
         self.__password = password
-        if personalFunds < 0:
-            personalFunds = 0
         self.__personalFunds = round(personalFunds, 2)
         self.__accounts = []
         self.__depositBoxes = []

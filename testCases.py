@@ -18,11 +18,6 @@ class TestUserClass(unittest.TestCase):
         testUser = User(testBank, "username", "pass", 10)
         self.assertEqual(testUser.getPersonalFunds(), 10)
 
-    def testConstructorFundsNegative(self):
-        testBank = Bank("Test Bank")
-        testUser = User(testBank, "username", "pass", -10)
-        self.assertEqual(testUser.getPersonalFunds(), 0)
-
     def testConstructorFundsZero(self):
         testBank = Bank("Test Bank")
         testUser = User(testBank, "username", "pass", 0)
