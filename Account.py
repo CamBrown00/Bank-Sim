@@ -3,16 +3,10 @@ from User import *
 
 class Account:
 
-    def __init__(self, owner, startingFunds, aType, unusedIdList):
+    def __init__(self, owner, name):
         self.__owner = owner
-        self.__funds = startingFunds
-        self.__aType = AccountType.aType
-
-        # Assign id to field, remove assigned id from list
-        self.__id = unusedIdList.pop(0)
-
-        # Assign interest field using interest rate from user owner's bank
-        self.__interest = owner.bankOwner
+        self.__funds = 0
+        self.__id = name
 
     def addFunds(self, funds):
         if self.__owner.isLoggedIn:
@@ -26,21 +20,12 @@ class Account:
         if self.__owner.isLoggedIn:
             return self.__funds
 
-    def getInterest(self):
-        return self.__interest
-
-    def getAccountType(self):
-        return self.__aType
-
-    def getID(self):
+    def getId(self):
         return self.__id
 
     # Setters
     def setOwner(self, owner):
         self.__owner = owner
-
-    def setAccountType(self, aType):
-        self.__aType = aType
 
     def setID(self, id):
         self.__id = id

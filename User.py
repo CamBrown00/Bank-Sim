@@ -3,10 +3,6 @@ from Account import *
 from DepositBox import *
 
 
-class AccountType(Enum):
-    SAVINGS = 1
-    CHECKING = 2
-
 class User():
 
     def __init__(self, bankOwner, username, password, personalFunds):
@@ -18,8 +14,8 @@ class User():
         self.__depositBoxes = []
         self.isLoggedIn = True
 
-    def createAccount(self, startingFunds, aType, unusedIdList, bank):
-        newAccount = Account(self, startingFunds, aType, unusedIdList, bank)
+    def createAccount(self, name):
+        newAccount = Account(self, name)
         self.__accounts.append(newAccount)
         self.__bankOwner.addAccount(newAccount)
 
@@ -41,7 +37,21 @@ class User():
 
     def addFundsToAccount(self, funds, accountIndex):
         if self.isLoggedIn:
-            if (funds >= 0 and self.personalFunds >= funds) or (funds < 0 and self.personalFunds + funds >= 0):
+            if (funds >= 0 and self.__personalFunds >= funds) or (funds < 0 and self.__personalFunds + funds >= 0):
                 self.__personalFunds -= funds
                 self.__accounts[accountIndex].addFunds(funds)
+                print("Transfer complete.")
+            else:
+                print("Input amount was invalid, please try again.")
 
+    def getAccounts(self):
+        return self.__accounts
+
+    def getDepositBoxes(self):
+        return self.__depositBoxes
+
+    def getPersonalFunds(self):
+        return self.__personalFunds
+
+    def getBankOwner(self):
+        return self.__bankOwner

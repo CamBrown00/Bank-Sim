@@ -1,6 +1,5 @@
 from User import *
 
-
 class DepositBox():
 
     def __init__(self, owner, capacity, contents):

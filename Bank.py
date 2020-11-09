@@ -1,6 +1,4 @@
 from User import *
-import csv
-
 
 class Bank:
 
@@ -10,9 +8,7 @@ class Bank:
         self.__accounts = []
         self.__depositBoxes = []
         self.__users = []
-
-    def __init__(self, name, filename):
-        self.__name = name
+        self.__maxDepositBoxCapacity = 10
 
     def registerUser(self, user):
         self.__users.append(user)
@@ -25,3 +21,9 @@ class Bank:
 
     def getName(self):
         return self.__name
+
+    def getUsers(self):
+        return self.__users
+
+    def getMaxDepositBoxCapacity(self):
+        return self.__maxDepositBoxCapacity
