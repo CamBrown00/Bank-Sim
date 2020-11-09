@@ -8,9 +8,10 @@ class Account:
         self.__funds = 0
         self.__id = name
 
+    # just adds funds to the funds field, validation is handled in the helper method for this in User obj
     def addFunds(self, funds):
         if self.__owner.isLoggedIn:
-            self.__funds += funds
+            self.__funds += round(funds, 2)
 
     # Getters
     def getOwner(self):

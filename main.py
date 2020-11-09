@@ -83,11 +83,13 @@ def main():
         print("1. Create Account \n2. Select Account \n3. Register Deposit Box \n4. Select Deposit Box \n5. Check Personal Funds ")
         userMenuChoice = input("Your Selection: ")
 
+        # Account creation
         if userMenuChoice == "1":
             newAccountName = input("Please enter the new account's name: ")
             mainUser.createAccount(newAccountName)
             print("Account '" + newAccountName + "' has been created. ")
 
+        # Account selection
         elif userMenuChoice == "2":
             print("\nPlease select one of your accounts, or enter nothing to go back. ")
             for i in range(len(mainUser.getAccounts())):
@@ -97,6 +99,7 @@ def main():
             mainAccountIndex = 0
             accountSelected = False
 
+            # Validate selection input
             while not accountSelected and accountChoice != "":
                 try:
                     if int(accountChoice) - 1 < len(mainUser.getAccounts()) and int(accountChoice) - 1 >= 0:
@@ -106,6 +109,7 @@ def main():
                 except ValueError:
                     print("Input was invalid, try again.")
 
+            # Handle checking, withdrawing and depositing
             if accountSelected:
                 print("\nPlease select an action for this account, or enter nothing to go back. ")
                 print("1. Check Balance \n2. Withdraw Funds \n3. Deposit Funds ")
@@ -122,6 +126,7 @@ def main():
                     amount = input("Please enter an amount to deposit: ")
                     mainUser.addFundsToAccount(float(amount), mainAccountIndex)
 
+        # Create deposit box
         elif userMenuChoice == "3":
             depositItemChoice = ""
             itemList = []
@@ -138,6 +143,7 @@ def main():
             mainUser.registerDepositBox(mainBank.getMaxDepositBoxCapacity(), itemList)
             print("Your new deposit box has been registered. ")
 
+        # Select deposit box
         elif userMenuChoice == "4":
             print("\nPlease select one of your deposit boxes, or enter nothing to go back. ")
             for i in range(len(mainUser.getDepositBoxes())):
@@ -156,6 +162,7 @@ def main():
                 except ValueError:
                     print("Input was invalid, please try again.")
 
+            # Handle checking, withdrawing, and depositing in a deposit box
             if boxSelected:
                 print("\nPlease select an action for this deposit box, or enter nothing to go back. ")
                 print("1. Check Box \n2. Withdraw item \n3. Deposit item ")
@@ -185,7 +192,6 @@ def main():
         elif userMenuChoice == "q":
             mainUser.logout()
             quitProgram = True
-
 
 
 main()
