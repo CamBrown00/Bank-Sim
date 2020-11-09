@@ -46,7 +46,7 @@ def main():
             usernameChoice = input("Please enter your username: ")
             passwordChoice = input("Please enter your password: ")
             personalFundsChoice = input("Please enter your personal funds: ")
-            newUser = User(mainBank, usernameChoice, passwordChoice, personalFundsChoice)
+            newUser = User(mainBank, usernameChoice, passwordChoice, int(personalFundsChoice))
             newUser.login(usernameChoice, passwordChoice)
             mainBank.registerUser(newUser)
             print("Your user profile has been created, " + usernameChoice)
