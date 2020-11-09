@@ -126,17 +126,58 @@ def main():
             depositItemChoice = ""
             itemList = []
             itemCount = 0
-            print("The maximum capacity of your new deposit box is " + str(mainBank.getMaxDepositBoxCapacity()))
+            print("\nThe maximum capacity of your new deposit box is " + str(mainBank.getMaxDepositBoxCapacity()))
             print("Please enter the contents of the new deposit box one by one, enter 'f' when finished.")
 
             while depositItemChoice != "f" and itemCount < mainBank.getMaxDepositBoxCapacity() - 1:
                 itemCount += 1
-                depositItemChoice = input("Please enter an item")
-                itemList.append(depositItemChoice)
-                
+                depositItemChoice = input("Please enter an item: ")
+
+                if depositItemChoice != "f":
+                    itemList.append(depositItemChoice)
+            mainUser.registerDepositBox(mainBank.getMaxDepositBoxCapacity(), itemList)
+            print("Your new deposit box has been registered. ")
 
         elif userMenuChoice == "4":
-            break
+            print("\nPlease select one of your deposit boxes, or enter nothing to go back. ")
+            for i in range(len(mainUser.getDepositBoxes())):
+                print("Deposit box #" + str(i + 1))
+            boxChoice = input("Your Selection: ")
+            mainBox = ""
+            mainBoxIndex = 0
+            boxSelected = False
+
+            while not boxSelected and boxChoice != "":
+                try:
+                    if int(boxChoice) - 1 < len(mainUser.getDepositBoxes()) and int(boxChoice) - 1 >= 0:
+                        mainBox = mainUser.getDepositBoxes()[int(boxChoice) - 1]
+                        mainBoxIndex = int(boxChoice) - 1
+                        boxSelected = True
+                except ValueError:
+                    print("Input was invalid, please try again.")
+
+            if boxSelected:
+                print("\nPlease select an action for this deposit box, or enter nothing to go back. ")
+                print("1. Check Box \n2. Withdraw item \n3. Deposit item ")
+                subBoxChoice = input("Your Selection: ")
+
+                if subBoxChoice == "1":
+                    print("Box contents: " + str(mainBox.getContents()))
+
+                elif subBoxChoice == "2":
+                    print("The box contents are as follows. ")
+                    for i in range(len(mainBox.getContents())):
+                        print(str(i) + ". " + mainBox.getContents()[i])
+                    withdrawalItemIndex = int(input("Please enter the number of the item you wish to withdraw: "))
+
+                    if withdrawalItemIndex >= 0 and withdrawalItemIndex < len(mainBox.getContents()):
+                        mainUser.removeItemFromBox(withdrawalItemIndex, mainBoxIndex)
+                        print("Item removed.")
+
+                elif subBoxChoice == "3":
+                    newBoxItem = input("Please enter an item to deposit: ")
+                    mainUser.addItemToBox(newBoxItem, mainBoxIndex)
+                    print("Item added.")
 
         elif userMenuChoice == "5":
             print("Your personal funds are: " + str(mainUser.getPersonalFunds()))

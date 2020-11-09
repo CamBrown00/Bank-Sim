@@ -44,6 +44,14 @@ class User():
             else:
                 print("Input amount was invalid, please try again.")
 
+    def addItemToBox(self, item, boxIndex):
+        if self.isLoggedIn:
+            self.__depositBoxes[boxIndex].getContents().append(item)
+
+    def removeItemFromBox(self, withdrawalIndex, boxIndex):
+        if self.isLoggedIn:
+            del self.__depositBoxes[boxIndex].getContents()[withdrawalIndex]
+
     def getAccounts(self):
         return self.__accounts
 
