@@ -6,7 +6,9 @@ class DepositBox():
     def __init__(self, owner, capacity, contents):
         self.__owner = owner
         self.__capacity = capacity
-        self.__contents = contents
+
+        if len(contents) <= capacity:
+            self.__contents = contents
 
     def getOwner(self):
         return self.__owner

@@ -1,5 +1,6 @@
 from enum import Enum
 from Account import *
+from DepositBox import *
 
 
 class AccountType(Enum):
@@ -8,18 +9,25 @@ class AccountType(Enum):
 
 class User():
 
-    def __init__(self, bankOwner, username, password, personalFunds, accounts, depositBoxes):
+    def __init__(self, bankOwner, username, password, personalFunds):
         self.__bankOwner = bankOwner
         self.__username = username
         self.__password = password
         self.__personalFunds = personalFunds
-        self.__accounts = accounts
-        self.__depositBoxes = depositBoxes
+        self.__accounts = []
+        self.__depositBoxes = []
         self.isLoggedIn = True
 
     def createAccount(self, startingFunds, aType, unusedIdList, bank):
         newAccount = Account(self, startingFunds, aType, unusedIdList, bank)
         self.__accounts.append(newAccount)
+        self.__bankOwner.addAccount(newAccount)
+
+    def registerDepositBox(self, capacity, contents):
+        newDepositBox = DepositBox(self, capacity, contents)
+        self.__depositBoxes.append(newDepositBox)
+        self.__bankOwner.addDepositBox(newDepositBox)
+
 
     def login(self, username, password) -> bool:
         if username == self.__username and password == self.__password:
